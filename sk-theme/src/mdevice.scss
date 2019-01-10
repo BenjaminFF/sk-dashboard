@@ -1,6 +1,108 @@
 @import "mixins/mixins";
 @import "common/var";
 
-@include b(app){
+@include b(mdevice){
+  width: 100%;
+  height: 100%;
 
+  @include e(header){
+    width: 100%;
+    height: 5rem;
+    background-color: white;
+    box-shadow: 10px 0px 30px 0px rgba(0, 0, 0, 0.10);
+    display: flex;
+    align-items: center;
+  }
+
+  @include e(title){
+    margin-left: 5%;
+    font-size: 2.4rem;
+    margin-top: 3rem;
+    letter-spacing: 0.5rem;
+  }
+
+  @include e(register){
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 2rem;
+    height: 10rem;
+    background-color: white;
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.10);
+    border-radius: 5px;
+  }
+
+  @include e(list-container){
+    width: 90%;
+    height: 40rem;
+    margin-top: 3rem;
+    margin-left: 5%;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.10);
+    overflow: hidden;
+  }
+}
+
+@include b(mdevice-register){
+  @include e(title){
+    padding-top: 2rem;
+    position: relative;
+    margin-left: 5%;
+    font-size: 1.5rem;
+    box-sizing: border-box;
+  }
+
+  @include e(input-container){
+    display: flex;
+    align-items: center;
+    margin-left: 5%;
+    box-sizing: border-box;
+    padding-top: 2rem;
+  }
+}
+
+@include b(mdevice-list-container){
+  @include e(title){
+    padding-top: 2rem;
+    position: relative;
+    margin-left: 5%;
+    font-size: 1.5rem;
+    box-sizing: border-box;
+  }
+}
+
+@include b(mdevice-table){
+  margin-left: 5%;
+  width: 90%;
+  margin-top: 3rem;
+  color: #606266;
+
+  @include e(header){
+    width: 96%;
+    margin-left: 2%;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  @include e(body){
+    margin-top: 1rem;
+    width: 96%;
+    height: 20rem;
+    margin-left: 2%;
+    box-sizing: border-box;
+  }
+
+  @include e(tr){
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.06);
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+  }
 }

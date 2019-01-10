@@ -3,8 +3,7 @@
 
 @include b(app-sidebar){
   height: 100%;
-  background-color: #1f62b0;
-  box-shadow: 0 0px 30px 10px rgba(0, 0, 0, 0.14);
+  background-color: $--sk-color-primary;
   z-index: 1000;
   position: relative;
   color: white;
@@ -30,7 +29,7 @@
 @include b(sidebar-item){
   width: 100%;
   height: 5rem;
-  background-color: #1f62b0;
+  background-color: $--sk-color-primary;
   flex-grow: 0;
   flex-shrink: 0;
   display: flex;
@@ -41,7 +40,7 @@
 
   @include when(active){
     background-color: white;
-    color: #1f62b0;
+    color: $--sk-color-primary;
     transition: .2s all ease-in-out;
   }
 

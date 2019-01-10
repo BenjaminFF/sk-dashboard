@@ -72,7 +72,6 @@
 
   .main{
     height: 100%;
-    z-index: 100;
     background-color: rgba(179, 212, 252, 0.11);
     position: relative;
   }
