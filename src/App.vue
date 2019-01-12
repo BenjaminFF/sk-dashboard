@@ -5,7 +5,7 @@
         <i  class="sky-icon sky-logo" style="font-size: 3rem"/>
       </div>
       <div class="app-sidebar__items-container">
-        <div class="sidebar-item" v-for="item in sidebarItems" :class="[{'is-active':item.selected}]" @click="toggleItem(item)">
+        <div class="sidebar-item" v-for="item in sidebarItems" v-bind:to="item.link" :class="[{'is-active':item.selected}]" @click="toggleItem(item)">
           <i :class="['sky-'+item.icon]" class="sky-icon sidebar-item__icon"/>
           <div class="sidebar-item__title">{{item.title}}</div>
         </div>
@@ -32,11 +32,16 @@
     methods:{
       init(){
         this.sidebarItems=[
-          {title:"设备",link:"/manage_device",selected:true,icon:"tag"},
-          {title:"视频",link:"/manage_video",selected:false,icon:"menu"},
-          {title:"菜单",link:"/manage_video",selected:false,icon:"tag"},
-          {title:"标签",link:"/manage_video",selected:false,icon:"menu"}
+          {title:"设备",link:"/mdevice",selected:false,icon:"device"},
+          {title:"视频",link:"/mvideo",selected:false,icon:"video"},
+          {title:"菜单",link:"/mcategory",selected:false,icon:"category"},
+          {title:"标签",link:"/mtag",selected:true,icon:"tag"}
         ]
+        this.sidebarItems.forEach((item)=>{
+          if(item.selected){
+            this.$router.push(item.link);
+          }
+        });
       },
       toggleItem(item){
         if(item.selected){
@@ -46,6 +51,7 @@
           item.selected=false;
         })
         item.selected=true;
+        this.$router.push(item.link);
       }
     }
   }

@@ -1,16 +1,20 @@
 <template>
   <div class="mdevice">
-    <div class="mdevice__header"></div>
-    <div class="mdevice__title">设备</div>
     <div class="mdevice__register">
       <div class="mdevice-register__title">设备注册</div>
-      <div class="mdevice-register__input-container">
-        <div>序列号：</div>
-        <el-input v-model="SerialNumber" style=" width: 30%;margin-left: 2rem;"></el-input>
-        <div style="margin-left: 4rem">描述：</div>
-        <el-input v-model="Description" style=" width: 30%;margin-left: 2rem;"></el-input>
-        <el-button style="margin-left: 5%" type="primary" @click="uploadData()" :loading="isUpLoading">注 册</el-button>
-      </div>
+      <el-row class="mdevice-register__input-container">
+        <el-col :span="10">
+          <span>序列号：</span>
+          <el-input v-model="SerialNumber" style=" width: 60%;margin-left: 2rem;"></el-input>
+        </el-col>
+        <el-col :span="10">
+          <span>描述：</span>
+          <el-input v-model="Description" style=" width: 60%;margin-left: 2rem;"></el-input>
+        </el-col>
+        <el-col :span="4">
+          <el-button style="margin-left: 5%" type="primary" @click="uploadData()" :loading="isUpLoading">注 册</el-button>
+        </el-col>
+      </el-row>
     </div>
     <div class="mdevice__list-container">
       <div class="mdevice-list-container__title">设备列表</div>
@@ -18,7 +22,7 @@
         <el-row class="mdevice-table__header">
           <el-col v-for="tableHeader in tableHeaders" :span="tableHeader.span">{{tableHeader.title}}</el-col>
         </el-row>
-        <el-scrollbar style="height: 20rem;width: 100%">
+        <el-scrollbar style="height: 80%;width: 100%">
           <div class="mdevice-table__body">
             <el-row v-for="item in tableData" class="mdevice-table__tr">
               <el-col :span="4">{{item.Id}}</el-col>

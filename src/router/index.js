@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import mdevice from '@/components/mdevice'
+import mcategory from '@/components/mcategory'
+import mvideo from '@/components/mvideo'
+import mtag from '@/components/mtag'
 //const homepage = () => import('@/components/homepage')
 //const listpage = () => import('@/components/listpage')
 
@@ -10,8 +13,28 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'mcategory',
+      component: mcategory
+    },
+    {
+      path: '/mcategory',
+      name: 'mcategory',
+      component: mcategory
+    },
+    {
+      path: '/mdevice',
       name: 'mdevice',
       component: mdevice
     },
+    {
+      path: '/mtag',
+      name: 'mtag',
+      component: mtag
+    },
+    {
+      path: '/mvideo',
+      name: 'mvideo',
+      component: mvideo
+    }
   ]
 })
