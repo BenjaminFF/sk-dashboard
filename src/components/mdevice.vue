@@ -16,13 +16,13 @@
         </el-col>
       </el-row>
     </div>
-    <div class="mdevice__list-container">
+    <div class="mdevice__list-container" style="height: 60%">
       <div class="mdevice-list-container__title">设备列表</div>
       <div class="mdevice-table">
         <el-row class="mdevice-table__header">
           <el-col v-for="tableHeader in tableHeaders" :span="tableHeader.span">{{tableHeader.title}}</el-col>
         </el-row>
-        <el-scrollbar style="height: 80%;width: 100%">
+        <el-scrollbar class="m-el-scrollbar">
           <div class="mdevice-table__body">
             <el-row v-for="item in tableData" class="mdevice-table__tr">
               <el-col :span="4">{{item.Id}}</el-col>
@@ -41,7 +41,7 @@
       title="提示"
       :visible.sync="delDialogVisible"
       width="30%">
-      <span>确认删除此行吗？</span>
+      <span>确认删除这个设备吗？</span>
       <span slot="footer" class="dialog-footer">
     <el-button @click="delDialogVisible = false">取 消</el-button>
     <el-button type="primary" @click="uploadDelete()">删除</el-button>
@@ -51,8 +51,10 @@
       title="编辑"
       :visible.sync="editDialogVisible"
       width="30%">
-      <el-input style="margin-bottom: 2rem" v-model="curRow.SerialNumber" placeholder="serialNumber"></el-input>
-      <el-input style="margin-bottom: 2rem" v-model="curRow.Description" placeholder="Description"></el-input>
+      <span>序列号</span>
+      <el-input style="margin-bottom: 2rem;margin-top: 0.3rem" v-model="curRow.SerialNumber" placeholder="serialNumber"></el-input>
+      <span>描述</span>
+      <el-input style="margin-bottom: 2rem;margin-top: 0.3rem" v-model="curRow.Description" placeholder="Description"></el-input>
       <span slot="footer" class="dialog-footer">
     <el-button @click="editDialogVisible = false">取 消</el-button>
     <el-button type="primary" @click="uploadEdit()">更新</el-button>
@@ -168,7 +170,12 @@
 </style>
 
 <style>
-  .el-scrollbar__wrap {
+
+  .m-el-scrollbar{
+    height: 80%;
+    width: 100%;
+  }
+  .m-el-scrollbar>.el-scrollbar__wrap {
     overflow-x: hidden;
   }
 </style>

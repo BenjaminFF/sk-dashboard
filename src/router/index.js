@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import mdevice from '@/components/mdevice'
 import mcategory from '@/components/mcategory'
 import mvideo from '@/components/mvideo'
+import upload_video from '@/components/upload_video'
 import mtag from '@/components/mtag'
 //const homepage = () => import('@/components/homepage')
 //const listpage = () => import('@/components/listpage')
@@ -13,8 +14,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'mcategory',
-      component: mcategory
+      name: 'index',
+      component: mdevice
     },
     {
       path: '/mcategory',
@@ -35,6 +36,11 @@ export default new Router({
       path: '/mvideo',
       name: 'mvideo',
       component: mvideo
+    },
+    {
+      path: '/upload_video',
+      name: 'upload_video',
+      component: upload_video
     }
   ]
 })

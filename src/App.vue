@@ -4,12 +4,29 @@
       <div class="app-sidebar__header">
         <i  class="sky-icon sky-logo" style="font-size: 3rem"/>
       </div>
-      <div class="app-sidebar__items-container">
-        <div class="sidebar-item" v-for="item in sidebarItems" v-bind:to="item.link" :class="[{'is-active':item.selected}]" @click="toggleItem(item)">
-          <i :class="['sky-'+item.icon]" class="sky-icon sidebar-item__icon"/>
-          <div class="sidebar-item__title">{{item.title}}</div>
-        </div>
-      </div>
+      <el-menu
+        :router="true"
+        :default-active="defaultActive"
+        background-color="#1F62B0"
+        text-color="#fff">
+        <el-menu-item index="/mdevice">
+          <span slot="title">设备管理</span>
+        </el-menu-item>
+        <el-submenu index="2" style="color: white">
+          <template slot="title">
+            <span>视频管理</span>
+          </template>
+          <el-menu-item index="/upload_video" class="m-el-submenu-item">视频上传</el-menu-item>
+          <el-menu-item index="/mvideo" class="m-el-submenu-item">视频列表</el-menu-item>
+        </el-submenu>
+        <el-submenu index="1" style="color: white">
+          <template slot="title">
+            <span>菜单和标签管理</span>
+          </template>
+          <el-menu-item index="/mcategory" class="m-el-submenu-item">菜单</el-menu-item>
+          <el-menu-item index="/mtag" class="m-el-submenu-item">标签</el-menu-item>
+        </el-submenu>
+      </el-menu>
     </el-col>
     <el-col :span="20" class="main">
       <router-view></router-view>
@@ -23,7 +40,7 @@
     name: 'App',
     data() {
       return {
-        sidebarItems:[]
+        defaultActive:false
       }
     },
     created(){
@@ -31,35 +48,19 @@
     },
     methods:{
       init(){
-        this.sidebarItems=[
-          {title:"设备",link:"/mdevice",selected:false,icon:"device"},
-          {title:"视频",link:"/mvideo",selected:false,icon:"video"},
-          {title:"菜单",link:"/mcategory",selected:false,icon:"category"},
-          {title:"标签",link:"/mtag",selected:true,icon:"tag"}
-        ]
-        this.sidebarItems.forEach((item)=>{
-          if(item.selected){
-            this.$router.push(item.link);
-          }
-        });
+        console.log(this.$router.currentRoute.path);
+        this.defaultActive=this.$router.currentRoute.path;
       },
-      toggleItem(item){
-        if(item.selected){
-          return;
-        }
-        this.sidebarItems.forEach((item)=>{
-          item.selected=false;
-        })
-        item.selected=true;
-        this.$router.push(item.link);
-      }
     }
   }
 </script>
 
+
 <style>
   @import "assets/iconfont/iconfont.css";
+  @import "assets/lib/index.css";
   @import "../sk-theme/lib/index.css";
+  @import "../node_modules/animate.css/animate.css";
   body, html {
     width: 100%;
     height: 100%;
@@ -80,5 +81,30 @@
     height: 100%;
     background-color: rgba(179, 212, 252, 0.11);
     position: relative;
+  }
+
+  .m-el-submenu-item{
+    background-color: transparent !important;
+  }
+
+  .el-menu{
+    border-right: none !important;
+    user-select: none;
+  }
+
+  .el-menu-item, .el-submenu__title{
+    font-size: 1rem;
+    background-color: transparent;
+  }
+
+  .el-menu-item.is-active{
+    background-color: rgba(179, 212, 252, 0.11) !important;
+  }
+
+  .el-menu-item:hover{
+    background-color: rgba(179, 212, 252, 0.11) !important;
+  }
+  .el-submenu__title:hover{
+    background-color: rgba(179, 212, 252, 0.11) !important;
   }
 </style>

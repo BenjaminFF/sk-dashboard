@@ -1,7 +1,7 @@
 <template>
   <div class="el-list"  @mouseenter="nScrollbarData.thumbVisible=true"
        @mouseleave="nScrollbarData.thumbVisible=false">
-    <div
+    <div ref="wrap"
          :class="[
            'el-list__wrap',{
               'is-vertical':orientation=='vertical',
@@ -94,6 +94,7 @@
       methods:{
         handleScroll(){
             this.updateThumb();
+            this.$emit('handleScroll');
         },
         thumbMouseDown(event){
           this.nScrollbarData.thumbOnMove=true;
@@ -218,7 +219,13 @@
           let nScrollbarHeight=this.orientation=='horizontal'?el.offsetHeight-el.clientHeight:el.clientHeight;
           let thumbWidth=el.clientWidth/el.scrollWidth*el.clientWidth;
           let thumbHeight=el.clientHeight/el.scrollHeight*el.clientHeight;
-          let visible=el.scrollHeight>el.clientHeight||el.scrollWidth>el.clientWidth?true:false;
+          /*let visible=el.scrollHeight>el.clientHeight||el.scrollWidth>el.clientWidth?true:false;*/
+          this.$nextTick(()=>{
+            let warp=this.$el.children[0];
+            let visible=warp.scrollHeight>warp.clientHeight?true:false;
+            this.$emit('thumbVisible',visible);
+            console.log(warp.clientHeight);
+          });
           this.nScrollbarData= {
             width:nScrollbarWidth,
             height:nScrollbarHeight,
@@ -227,7 +234,7 @@
             thumbHeight:thumbHeight,
             thumbMoveX:0,
             thumbMoveY:0,
-            visible:visible,
+            visible:false,
             thumbOnMove:false,
             thumbPivotX:"",
             thumbPivotY:"",
@@ -253,6 +260,10 @@
             this.thumbStyle.width=this.nScrollbarData.thumbWidth+'px';
             this.nScrollbarData.visible=warp.scrollWidth>warp.clientWidth?true:false;
           }
+        },
+        thumbVisible(){
+          let warp=this.$el.children[0];
+          return warp.scrollHeight>warp.clientHeight?true:false;
         },
         addItem(index,item){
           if(this.flags.isAdding||this.flags.isDeleting){

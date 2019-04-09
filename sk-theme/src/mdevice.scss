@@ -4,12 +4,15 @@
 @include b(mdevice){
   width: 90%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   margin-left: 5%;
 
   @include e(register){
     width: 100%;
-    height: 20%;
-    margin-top: 5%;
+    height: 30%;
     background-color: white;
     box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.10);
     border-radius: 5px;
@@ -17,7 +20,6 @@
 
   @include e(list-container){
     width: 100%;
-    margin-top: 5%;
     height: 70%;
     border-radius: 5px;
     background-color: white;
@@ -28,39 +30,38 @@
 
 @include b(mdevice-register){
   @include e(title){
-    padding-top: 2rem;
     position: relative;
-    margin-left: 5%;
     font-size: 1.5rem;
     box-sizing: border-box;
+    padding: 2rem;
   }
 
   @include e(input-container){
     display: flex;
     align-items: center;
-    margin-left: 5%;
     box-sizing: border-box;
-    padding-top: 2rem;
+    width: 90%;
+    margin-left: 5%;
+    padding: 2rem;
   }
 }
 
 @include b(mdevice-list-container){
   @include e(title){
     position: relative;
-    margin-left: 5%;
+    padding: 2rem;
     font-size: 1.5rem;
     box-sizing: border-box;
-    height: 10%;
     display: flex;
     align-items: center;
   }
 }
 
 @include b(mdevice-table){
-  margin-left: 5%;
   width: 90%;
   color: #606266;
-  height: 90%;
+  height: 80%;
+  margin-left: 5%;
 
   @include e(header){
     width: 96%;
