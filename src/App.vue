@@ -26,6 +26,12 @@
           <el-menu-item index="/mcategory" class="m-el-submenu-item">菜单</el-menu-item>
           <el-menu-item index="/mtag" class="m-el-submenu-item">标签</el-menu-item>
         </el-submenu>
+        <el-submenu index="3" style="color: white">
+          <template slot="title">
+            <span>任务管理</span>
+          </template>
+          <el-menu-item index="/mtask" class="m-el-submenu-item">下发任务</el-menu-item>
+        </el-submenu>
       </el-menu>
     </el-col>
     <el-col :span="20" class="main">

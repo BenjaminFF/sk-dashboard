@@ -5,6 +5,7 @@ import mcategory from '@/components/mcategory'
 import mvideo from '@/components/mvideo'
 import upload_video from '@/components/upload_video'
 import mtag from '@/components/mtag'
+import mtask from '@/components/mtask'
 //const homepage = () => import('@/components/homepage')
 //const listpage = () => import('@/components/listpage')
 
@@ -41,6 +42,11 @@ export default new Router({
       path: '/upload_video',
       name: 'upload_video',
       component: upload_video
+    },
+    {
+      path: '/mtask',
+      name: 'mtask',
+      component: mtask
     }
   ]
 })

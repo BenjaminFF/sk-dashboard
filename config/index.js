@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/ccweb':{
-        target: 'http://192.168.1.172:8088/',
+        target: 'http://192.168.1.104:8080/',
         changeOrigin: true,
         pathRewrite: {
           '^/ccweb': '/ccweb'
