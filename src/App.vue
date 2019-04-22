@@ -2,7 +2,7 @@
   <el-row id="app">
     <el-col :span="4" class="app-sidebar">
       <div class="app-sidebar__header">
-        <i  class="sky-icon sky-logo" style="font-size: 3rem"/>
+        <img src="./assets/yidonglogo.svg" style="width: 20rem">
       </div>
       <el-menu
         :router="true"

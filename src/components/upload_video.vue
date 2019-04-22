@@ -51,7 +51,7 @@
                 list-type="picture-card">
                 <i class="el-icon-plus"></i>
               </el-upload>
-              <img width="148" height="148" :src="this.curPicUrl"/>
+              <!--<img width="148" height="148" :src="this.curPicUrl"/>!-->
             </div>
           </el-form-item>
           <el-form-item label="立体格式" prop="selectedCubeFormat">
@@ -111,7 +111,8 @@
         videoInfo: {},
         clipImg: {},
         curPicFile: {},
-        curPicUrl:''
+        curPicUrl:'',
+        hasPicCover:false
       }
     },
     created() {
@@ -193,9 +194,6 @@
       },
       uploadSuccess(response) {
         this.responseData = response;
-        this.responseData.Width = this.videoInfo.Width;
-        this.responseData.Height = this.videoInfo.Height;
-        this.responseData.Duration = this.videoInfo.Duration;
         this.step1.nextStepAble = true;
         this.step1.isDecoding = false;
         this.stepBar.active++;
@@ -276,6 +274,7 @@
         this.step3.visible = true;
       },
       picOnChanged(file, fileList) {
+        this.hasPicCover=true;
         this.curPicFile = file.raw;
         console.log('picOnChanged: ' + file);
         let fileType = file.raw.type;
@@ -299,22 +298,24 @@
         console.log('beforePicUpload');
         let formData = new FormData();
         formData.append('file', this.curPicFile);
-        console.log(this.curPicFile);
+        console.log(typeof this.curPicFile);
         let config = {
           headers: {'Content-Type': 'multipart/form-data'}
         };
         let IconInfo = {};
-        await this.axios.post('/ccweb/api/icons/upload', formData, config).then((res) => {
-          let IconInfo = res.data;
-          let img = new Image();
-          img.src = IconInfo.Url;
-          IconInfo.Width = img.width;
-          IconInfo.Height = img.height;
-          IconInfo.Size = img.Size;
-          IconInfo.FileType = {Id: 100};
-          this.curPicInfo = IconInfo;
-        });
-        await this.axios.post("/ccweb/api/icons/update", JSON.stringify(this.curPicInfo));
+        if(this.hasPicCover){
+          await this.axios.post('/ccweb/api/icons/upload', formData, config).then((res) => {
+            let IconInfo = res.data;
+            let img = new Image();
+            img.src = IconInfo.Url;
+            IconInfo.Width = img.width;
+            IconInfo.Height = img.height;
+            IconInfo.Size = img.Size;
+            IconInfo.FileType = {Id: 100};
+            this.curPicInfo = IconInfo;
+          });
+          await this.axios.post("/ccweb/api/icons/update", JSON.stringify(this.curPicInfo));
+        }
 
         this.responseData.Category = {Id: this.step2.form.selectedCategoryId};
         this.responseData.Tags = [{Id: this.step2.form.selectedTagId}];
@@ -333,7 +334,7 @@
       //videoChange可以作为video加入文件列表
       videoOnChange(file, fileList) {
         this.step1.hasFile = true;
-        let video = this.$refs['mVideo'];
+        /*let video = this.$refs['mVideo'];
         let canvas = this.$refs['mCanvas'];
         let outPutImg = this.$refs['mOutputImg'];
         this.$refs['mVideo'].src = URL.createObjectURL(file.raw);
@@ -352,7 +353,7 @@
           this.videoInfo.Duration = this.getType(minutes) + ':' + this.getType(seconds);
           this.draw(video, canvas, outPutImg);
         }
-        video.addEventListener('seeked', this.clipImg);
+        video.addEventListener('seeked', this.clipImg);*/
       },
       getType(time) {
         return time < 10 ? "0" + time : time;
